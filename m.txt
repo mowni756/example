@@ -1,0 +1,1016 @@
+Here is a clear step-by-step guide to complete the midterm task shown in your paper (ISWE406P – Agile Development Process and DevOps Lab). I’ll keep it simple and practical so you can actually perform it during the exam or lab.
+
+Step-by-Step Implementation Guide
+Step 1: Create a Maven-Based Application in GitHub
+1. Create a GitHub Repository
+Go to GitHub
+Click New Repository
+Name it:
+maven-jenkins-project
+Select Public
+Click Create Repository
+Step 2: Create Maven Project (Standard Directory Structure)
+In VS Code or Terminal
+Run:
+mvn archetype:generate
+Select:
+maven-archetype-quickstart
+
+Enter:
+
+GroupId: com.example
+ArtifactId: maven-demo
+Version: 1.0-SNAPSHOT
+
+Press Enter.
+
+Maven Structure Created
+maven-demo
+ ├── pom.xml
+ ├── src
+ │   ├── main
+ │   │   └── java
+ │   │       └── App.java
+ │   └── test
+ │       └── java
+ │           └── AppTest.java
+
+This is the standard Maven directory structure required in the question.
+
+Step 3: Push Project to GitHub
+Initialize Git
+git init
+git add .
+git commit -m "Initial Maven project"
+Connect GitHub
+git remote add origin https://github.com/yourusername/maven-jenkins-project.git
+git branch -M main
+git push -u origin main
+
+Repository is now on GitHub.
+
+Step 4: Clone Repository into VS Code
+Open VS Code
+
+Click:
+
+Clone Repository
+
+Paste:
+
+https://github.com/yourusername/maven-jenkins-project.git
+
+Select folder.
+
+Project opens in VS Code.
+
+Step 5: Modify the Program
+Open:
+App.java
+
+Replace code with:
+
+package com.example;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println("Hello Jenkins CI/CD Pipeline");
+    }
+}
+Save File
+Step 6: Commit Changes
+
+Open terminal in VS Code.
+
+Run:
+
+git add .
+git commit -m "Modified program"
+git push
+
+Now GitHub is updated.
+
+Step 7: Build and Validate Application
+Run Maven Build
+mvn clean install
+Output
+BUILD SUCCESS
+
+This ensures:
+
+Application is compatible for Jenkins integration.
+
+Step 8: Install Jenkins
+Open Browser
+http://localhost:8080
+Install Plugins
+
+Select:
+
+Install Suggested Plugins
+
+Create:
+
+Username
+Password
+
+Open Jenkins Dashboard.
+
+Step 9: Install Required Plugins
+
+Go to:
+
+Manage Jenkins
+
+→ Plugins
+
+Install:
+
+Git
+Maven Integration
+Pipeline
+GitHub Integration
+
+Restart Jenkins.
+
+Step 10: Configure Maven in Jenkins
+
+Go to:
+
+Manage Jenkins
+
+→ Global Tool Configuration
+
+Add Maven
+Name: Maven3
+
+Tick:
+
+Install Automatically
+
+Save.
+
+Step 11: Create Jenkins Pipeline Project
+
+Go to:
+
+New Item
+
+Enter:
+
+maven-pipeline
+
+Select:
+
+Pipeline
+
+Click OK.
+
+Step 12: Configure GitHub Repository
+
+Scroll to:
+
+Pipeline
+
+Select:
+
+Pipeline Script
+Step 13: Add Pipeline Script
+
+Paste this:
+
+pipeline {
+
+    agent any
+
+    tools {
+        maven 'Maven3'
+    }
+
+    stages {
+
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/yourusername/maven-jenkins-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successful'
+        }
+
+        failure {
+            echo 'Build Failed'
+        }
+    }
+}
+
+Click Save
+
+Step 14: Run CI/CD Pipeline
+
+Click:
+
+Build Now
+
+You will see:
+
+Clone Repository
+Build
+Test
+Package
+Build Successful
+
+Click build number → Console Output.
+
+Step 15: Verify CI/CD Workflow
+
+You should see:
+
+Cloning GitHub
+Running Maven
+Testing
+Packaging
+BUILD SUCCESS
+
+This completes:
+
+Maven project
+GitHub integration
+VS Code modification
+Jenkins pipeline
+CI/CD execution
+Final Output You Should Show Faculty
+1. GitHub Repository
+maven-jenkins-project
+2. Maven Structure
+pom.xml
+src/main/java
+src/test/java
+3. Modified Code
+Hello Jenkins CI/CD Pipeline
+4. Jenkins Pipeline
+Clone
+Build
+Test
+Package
+Success
+5. Console Output
+BUILD SUCCESS
+One-Line Explanation to Tell Faculty
+
+I created a Maven-based application, pushed it to GitHub, cloned and modified it in VS Code, built it using Maven, and configured a Jenkins pipeline to automate the CI/CD workflow.
+
+If you want, I can give you a 5-minute viva explanation script so you can confidently explain this step-by-step during the exam.
+
+Ma'am will be giving the code in the white board
+
+Got it, Nivi. Since ma’am will give the program on the whiteboard, your task is not to create your own Maven project from scratch but to take that given code and complete the DevOps workflow. Here’s the correct step-by-step process you should follow in the exam/lab.
+
+What You Will Actually Do in the Exam
+
+Whiteboard will contain something like:
+
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+
+Your job is to:
+
+Convert this into a Maven project → Push to GitHub → Modify → Build → Jenkins Pipeline
+
+Step 1: Create Maven Project
+
+Open Terminal or VS Code Terminal
+
+mvn archetype:generate
+
+Choose:
+
+maven-archetype-quickstart
+
+Enter:
+
+GroupId: com.example
+ArtifactId: whiteboard-project
+Version: 1.0-SNAPSHOT
+
+Project will be created.
+
+Step 2: Replace Whiteboard Code
+
+Go to:
+
+src/main/java/com/example/App.java
+
+Delete existing code.
+
+Paste whiteboard code.
+
+Example:
+
+package com.example;
+
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello from Whiteboard Program");
+    }
+}
+
+Save.
+
+Step 3: Build and Test Locally
+
+Run:
+
+mvn clean install
+
+You should see:
+
+BUILD SUCCESS
+
+This proves:
+
+Whiteboard program works in Maven structure.
+
+Step 4: Create GitHub Repository
+
+Go to GitHub.
+
+Create repository:
+
+whiteboard-maven-project
+Step 5: Push Code to GitHub
+
+Inside project folder:
+
+git init
+git add .
+git commit -m "Whiteboard program added"
+git remote add origin https://github.com/username/whiteboard-maven-project.git
+git branch -M main
+git push -u origin main
+
+Now GitHub is ready.
+
+Step 6: Modify Program (Required in Question)
+
+Open App.java
+
+Modify:
+
+System.out.println("Hello from Whiteboard Program - Jenkins CI/CD");
+
+Then commit:
+
+git add .
+git commit -m "Modified whiteboard program"
+git push
+Step 7: Open Jenkins
+
+Go to:
+
+http://localhost:8080
+Step 8: Create Pipeline
+
+Click:
+
+New Item
+
+Name:
+
+whiteboard-pipeline
+
+Select:
+
+Pipeline
+
+Click OK.
+
+Step 9: Add Pipeline Script
+
+Paste this:
+
+pipeline {
+
+    agent any
+
+    tools {
+        maven 'Maven3'
+    }
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git 'https://github.com/username/whiteboard-maven-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Whiteboard Program Build Successful'
+        }
+    }
+}
+
+Save.
+
+Step 10: Run Pipeline
+
+Click:
+
+Build Now
+
+Check:
+
+Console Output
+
+You will see:
+
+Cloning GitHub
+Building Maven
+Testing
+Packaging
+BUILD SUCCESS
+What Ma’am Will Expect
+
+You should show:
+
+1. Whiteboard code inside Maven project
+2. GitHub repository
+3. Modified code commit
+4. Maven build success
+5. Jenkins pipeline running
+6. CI/CD workflow executed
+Simple Explanation You Can Say
+
+Ma’am, the whiteboard program was converted into a Maven-based application, pushed to GitHub, modified and committed, built using Maven, and integrated with Jenkins to execute a CI/CD pipeline.
+
+Quick Exam Flow (Remember This)
+Whiteboard Code
+     ↓
+Maven Project
+     ↓
+GitHub Push
+     ↓
+Modify Code
+     ↓
+Maven Build
+     ↓
+Jenkins Pipeline
+     ↓
+CI/CD Execution
+
+If you want, I can give you 2–3 different whiteboard program examples (calculator, string reverse, prime number) and show how to quickly convert them into Maven and Jenkins pipeline, so you’ll be ready for any code ma’am writes.
+
+1. number utilitykit - combine odd/even/sum of digits/reverse  
+2. Scholarship eligibility  - income, marks, caste_category 
+Any one of the options 
+
+You need to pick any one of the two whiteboard programs and convert it into a Maven project with Jenkins CI/CD. I’ll give you complete ready-to-use code and pipeline for both, so you can choose quickly during the exam.
+
+Option 1: Number Utility Kit (Recommended – Easier)
+Whiteboard Program
+App.java
+package com.example;
+
+import java.util.Scanner;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter a number:");
+        int num = sc.nextInt();
+
+        // Odd or Even
+        if (num % 2 == 0)
+            System.out.println("Even Number");
+        else
+            System.out.println("Odd Number");
+
+        // Sum of digits
+        int temp = num;
+        int sum = 0;
+
+        while (temp > 0) {
+            sum = sum + temp % 10;
+            temp = temp / 10;
+        }
+
+        System.out.println("Sum of digits: " + sum);
+
+        // Reverse number
+        int reverse = 0;
+        temp = num;
+
+        while (temp > 0) {
+            reverse = reverse * 10 + temp % 10;
+            temp = temp / 10;
+        }
+
+        System.out.println("Reverse: " + reverse);
+    }
+}
+Maven Structure
+number-utilitykit
+ ├── pom.xml
+ └── src
+     ├── main
+     │   └── java
+     │       └── com/example/App.java
+     └── test
+         └── java
+GitHub Push
+git init
+git add .
+git commit -m "Number Utility Kit"
+git remote add origin https://github.com/username/number-utilitykit.git
+git push -u origin main
+Jenkins Pipeline Code
+pipeline {
+
+    agent any
+
+    tools {
+        maven 'Maven3'
+    }
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git 'https://github.com/username/number-utilitykit.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Number Utility Kit Build Successful'
+        }
+    }
+}
+Viva Explanation
+
+You can say:
+
+This program checks odd/even, sum of digits, and reverse of a number. I created a Maven project, added the whiteboard code, pushed it to GitHub, and executed CI/CD using Jenkins pipeline.
+
+Option 2: Scholarship Eligibility
+Whiteboard Program
+App.java
+package com.example;
+
+import java.util.Scanner;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Income:");
+        int income = sc.nextInt();
+
+        System.out.println("Enter Marks:");
+        int marks = sc.nextInt();
+
+        System.out.println("Enter Caste Category (SC/ST/OBC/GEN):");
+        String caste = sc.next();
+
+        if (income < 300000 && marks > 75 &&
+                (caste.equalsIgnoreCase("SC") ||
+                 caste.equalsIgnoreCase("ST") ||
+                 caste.equalsIgnoreCase("OBC"))) {
+
+            System.out.println("Scholarship Eligible");
+
+        } else {
+            System.out.println("Not Eligible");
+        }
+    }
+}
+Jenkins Pipeline Code
+pipeline {
+
+    agent any
+
+    tools {
+        maven 'Maven3'
+    }
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git 'https://github.com/username/scholarship-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Scholarship Project Build Successful'
+        }
+    }
+}
+Viva Explanation
+
+This program checks scholarship eligibility based on income, marks, and caste category. The program was placed in Maven structure, pushed to GitHub, and Jenkins pipeline was used to build and execute the CI/CD workflow.
+
+Which One Should You Choose?
+Choose Number Utility Kit if:
+You want simple logic
+Less conditions
+Faster to write
+Less chances of error
+Choose Scholarship Eligibility if:
+You want structured conditions
+Slightly more logical explanation
+Faculty may like real-world example
+Recommended Choice
+
+Go with Number Utility Kit because:
+
+Easy to write
+Easy to debug
+Maven build runs smoothly
+Jenkins pipeline works without input issues
+
+If you want, I can give you full pom.xml for this so you can directly paste and run in Jenkins without errors.
+
+Now how I implement this?
+
+Nivi, here is the exact implementation flow you should follow in the lab when ma’am gives either Number Utility Kit or Scholarship Eligibility on the whiteboard. This is a practical execution guide from start to finish so you can complete it without confusion.
+
+Full Implementation (Start to End)
+Step 1: Open Terminal in VS Code
+
+Open VS Code → Terminal
+
+Run:
+
+mvn archetype:generate
+Step 2: Create Maven Project
+
+Select:
+
+maven-archetype-quickstart
+
+Then enter:
+
+GroupId: com.example
+ArtifactId: number-utilitykit
+Version: 1.0-SNAPSHOT
+Package: com.example
+
+Press Enter.
+
+Project will be created.
+
+Step 3: Open Project in VS Code
+
+Go to:
+
+File → Open Folder
+
+Select:
+
+number-utilitykit
+
+Now project opens.
+
+Step 4: Add Whiteboard Code
+
+Go to:
+
+src/main/java/com/example/App.java
+
+Replace code with:
+
+package com.example;
+
+import java.util.Scanner;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter a number:");
+        int num = sc.nextInt();
+
+        if (num % 2 == 0)
+            System.out.println("Even Number");
+        else
+            System.out.println("Odd Number");
+
+        int temp = num;
+        int sum = 0;
+
+        while (temp > 0) {
+            sum = sum + temp % 10;
+            temp = temp / 10;
+        }
+
+        System.out.println("Sum: " + sum);
+
+        int reverse = 0;
+        temp = num;
+
+        while (temp > 0) {
+            reverse = reverse * 10 + temp % 10;
+            temp = temp / 10;
+        }
+
+        System.out.println("Reverse: " + reverse);
+    }
+}
+
+Save.
+
+Step 5: Build Maven Project
+
+Run in terminal:
+
+mvn clean install
+
+Expected output:
+
+BUILD SUCCESS
+
+This confirms:
+
+Maven project is working.
+
+Step 6: Create GitHub Repository
+
+Go to GitHub.
+
+Click:
+
+New Repository
+
+Name:
+
+number-utilitykit
+
+Click:
+
+Create Repository
+Step 7: Push to GitHub
+
+In VS Code terminal:
+
+git init
+git add .
+git commit -m "Initial Number Utility Kit"
+git remote add origin https://github.com/username/number-utilitykit.git
+git branch -M main
+git push -u origin main
+
+Now GitHub contains the project.
+
+Step 8: Modify Program (Required in Question)
+
+Edit:
+
+System.out.println("Number Utility Kit Running in Jenkins");
+
+Save.
+
+Then run:
+
+git add .
+git commit -m "Modified program"
+git push
+Step 9: Open Jenkins
+
+Browser:
+
+http://localhost:8080
+
+Open Dashboard.
+
+Step 10: Create Pipeline
+
+Click:
+
+New Item
+
+Enter:
+
+number-utility-pipeline
+
+Select:
+
+Pipeline
+
+Click OK.
+
+Step 11: Configure Maven
+
+Go to:
+
+Manage Jenkins
+
+Then:
+
+Global Tool Configuration
+
+Add:
+
+Maven3
+
+Save.
+
+Step 12: Add Pipeline Script
+
+Scroll to:
+
+Pipeline Script
+
+Paste:
+
+pipeline {
+
+    agent any
+
+    tools {
+        maven 'Maven3'
+    }
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git 'https://github.com/username/number-utilitykit.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successful'
+        }
+
+        failure {
+            echo 'Build Failed'
+        }
+    }
+}
+
+Click Save
+
+Step 13: Run Pipeline
+
+Click:
+
+Build Now
+
+Then:
+
+Console Output
+
+Expected:
+
+Cloning repository
+Building Maven
+Testing
+Packaging
+BUILD SUCCESS
+Step 14: Show Output to Faculty
+
+Show:
+
+GitHub Repo
+number-utilitykit
+Maven Structure
+pom.xml
+src/main/java
+Jenkins Pipeline
+Clone
+Build
+Test
+Package
+Console Output
+BUILD SUCCESS
+30-Second Explanation
+
+Say this:
+
+I created a Maven project and added the whiteboard program. Then I pushed it to GitHub and modified the program. After that, I configured Jenkins pipeline to clone the repository, build the project using Maven, run tests, and package the application, which completes the CI/CD workflow.
+
+If You Choose Scholarship Instead
+
+Only change:
+
+App.java code
+Repository name
+Pipeline Git URL
+
+Everything else remains the same.
+
+If you want, I can give you a visual diagram (flowchart) of the entire process so you can remember it easily during the exam.
