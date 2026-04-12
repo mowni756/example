@@ -53,4 +53,18 @@ pipeline {
 }
 Save File
 
+Command	What it does
+git init	-Start a new repository
+git add .	-Stage all changes
+git commit -m "message"	-Save a snapshot of changes
+git status	-Show current changes and staging status
+git log --oneline	-View commit history in short form
+git branch branch_name	-Create a new branch
+git checkout branch_name	-Switch to another branch
+git merge branch_name	-Merge a branch into the current branch
+git push -u origin main	-Upload code to GitHub (first push sets upstream)
+git pull origin main	-Download and merge latest changes from GitHub
+git clone <url>
+git remote add origin <url>
+
         
