@@ -26,15 +26,10 @@ Press Enter.
 
 Maven Structure Created
 maven-demo
- ├── pom.xml
- ├── src
- │   ├── main
- │   │   └── java
- │   │       └── App.java
- │   └── test
- │       └── java
- │           └── AppTest.java
-
+├── pom.xml  
+└── src/  
+├── main/java/com/example/App.java  
+└── test/java/com/example/AppTest.java 
 This is the standard Maven directory structure required in the question.
 
 Step 3: Push Project to GitHub
@@ -182,48 +177,27 @@ Step 13: Add Pipeline Script
 Paste this:
 
 pipeline {
-
     agent any
 
     tools {
-        maven 'Maven3'
+        maven 'M3'
     }
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Checkout Git') {
             steps {
-                git 'https://github.com/yourusername/maven-jenkins-project.git'
+                git branch: 'main',
+                    url: 'https://github.com/aishwaryasuresh020-source/Order_tracking_system.git'
             }
         }
 
-        stage('Build') {
+        stage('Build and Test') {
             steps {
-                sh 'mvn clean compile'
+                bat 'mvn clean test'
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                sh 'mvn package'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build Successful'
-        }
-
-        failure {
-            echo 'Build Failed'
-        }
     }
 }
 
