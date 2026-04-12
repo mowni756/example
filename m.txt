@@ -163,3 +163,442 @@ docker push yourdockerhubusername/shopping-cart-app
 kubectl apply -f deployment.yaml
 kubectl get pods
 kubectl get svc
+
+docker sweatha (my)
+Alright Chello, this is basically a **mini DevOps pipeline project** (HTML → GitHub → Docker → Jenkins → Kubernetes). I’ll break it into **super simple steps** so you can actually *run it without getting stuck*.
+
+---
+
+# 🧩 1. Create Resume Web Page (HTML)
+
+Create a folder → `resume-site`
+
+### 👉 `index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Resume</title>
+</head>
+<body>
+    <h1>Your Name</h1>
+    <p>Email: your@email.com</p>
+    <h2>Skills</h2>
+    <ul>
+        <li>Java</li>
+        <li>HTML</li>
+        <li>Docker</li>
+    </ul>
+</body>
+</html>
+```
+
+---
+
+# 🐙 2. Push to GitHub
+
+### Step 1: Create repo in GitHub
+
+Example repo name: `resume-devops`
+
+### Step 2: Run in VS Code terminal
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/your-username/resume-devops.git
+git push -u origin main
+```
+
+---
+
+# 💻 3. Clone in VS Code & Update
+
+```bash
+git clone https://github.com/your-username/resume-devops.git
+cd resume-devops
+```
+
+Make change → save → then:
+
+```bash
+git add .
+git commit -m "Updated resume"
+git push
+```
+
+---
+
+# 🐳 4. Dockerize the App
+
+Create a file:
+
+### 👉 `Dockerfile`
+
+```dockerfile
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+```
+
+---
+
+### Build Docker Image
+
+```bash
+docker build -t resume-app .
+```
+
+---
+
+### Run Container
+
+```bash
+docker run -d -p 8080:80 resume-app
+```
+
+👉 Open browser:
+`http://localhost:8080`
+
+---
+
+# ⚙️ 5. Install Required Tools
+
+You need:
+
+* Docker Desktop
+* Jenkins
+* Kubernetes
+
+👉 In Docker Desktop → enable Kubernetes ✔️
+
+---
+
+# 🔁 6. Jenkins Pipeline Setup
+
+### Open Jenkins:
+
+```
+http://localhost:8080
+```
+
+---
+
+### Create Pipeline Job
+
+* New Item → Pipeline → name: `resume-pipeline`
+
+---
+
+### 👉 Pipeline Script
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git 'https://github.com/your-username/resume-devops.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t resume-app .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                bat 'docker run -d -p 8081:80 resume-app'
+            }
+        }
+    }
+}
+```
+
+👉 Click **Build Now**
+
+---
+
+# ☸️ 7. Kubernetes Deployment
+
+Create file:
+
+### 👉 `deployment.yaml`
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resume
+  template:
+    metadata:
+      labels:
+        app: resume
+    spec:
+      containers:
+      - name: resume
+        image: resume-app
+        ports:
+        - containerPort: 80
+```
+
+---
+
+### 👉 `service.yaml`
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-service
+spec:
+  type: NodePort
+  selector:
+    app: resume
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30007
+```
+
+---
+
+### Run Kubernetes
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+
+👉 Open:
+
+```
+http://localhost:30007
+```
+
+---
+
+# 📊 8. View in Docker Desktop
+
+Open **Docker Desktop → Kubernetes tab**
+
+You’ll see:
+
+* Pods
+* Containers
+* Running app
+
+---
+
+# ✅ Final Flow (Understand This!)
+
+1. HTML created
+2. Code pushed to GitHub
+3. Jenkins pulls code
+4. Docker builds image
+5. Kubernetes deploys
+6. App runs in browser
+
+---
+
+# ⚠️ Common Mistakes (IMPORTANT)
+
+* Docker not running ❌
+* Port already used ❌
+* Kubernetes not enabled ❌
+* Wrong GitHub URL ❌
+* Jenkins not allowed to use Docker ❌
+
+---
+
+# 🚀 If You Want Next Level
+
+I can also give:
+
+* 🔹 Full Jenkins + Kubernetes integrated pipeline (auto deploy)
+* 🔹 Screenshots for viva
+* 🔹 Explanation to tell your professor
+
+Just tell me 👍
+ aishu
+Got it — this is a **full DevOps mini-project** (very common for exams). I’ll give you a **clean, ready-to-write answer + steps + files** so you can reproduce it easily tomorrow.
+
+---
+
+#  **Complete Workflow (Step-by-Step)**
+
+## Step 1: Create Resume Web Page (HTML)
+
+Create a file `index.html`:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Resume</title>
+</head>
+<body>
+    <h1>Aishwarya Suresh</h1>
+    <p>Email: aishwarya@email.com</p>
+    <p>Phone: 1234567890</p>
+
+    <h2>Education</h2>
+    <p>B.Tech in Computer Science</p>
+
+    <h2>Skills</h2>
+    <ul>
+        <li>Java</li>
+        <li>HTML</li>
+        <li>DevOps</li>
+    </ul>
+</body>
+</html>
+```
+
+---
+
+## Step 2: Push to GitHub (VERY IMPORTANT)
+
+### Create repo on GitHub
+
+Then run:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit - Resume page"
+git branch -M main
+git remote add origin https://github.com/your-username/resume-project.git
+git push -u origin main
+```
+
+---
+
+## Step 3: Clone in VS Code
+
+```bash
+git clone https://github.com/your-username/resume-project.git
+cd resume-project
+code .
+```
+
+Make changes → then:
+
+```bash
+git add .
+git commit -m "Updated resume"
+git push
+```
+
+---
+
+## Step 4: Dockerize the Application
+
+Create `Dockerfile`:
+
+```dockerfile
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+```
+
+---
+
+### Build & Run using Docker
+
+```bash
+docker build -t resume-app .
+docker run -d -p 8080:80 resume-app
+```
+
+👉 Open browser:
+`http://localhost:8080`
+
+---
+
+##  Step 5: Push Docker Image (Optional but good)
+
+```bash
+docker tag resume-app yourdockerhub/resume-app
+docker push yourdockerhub/resume-app
+```
+
+---
+
+##  Step 6: Jenkins Pipeline Setup
+
+Use Jenkins
+
+### Create `Jenkinsfile`
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/your-username/resume-project.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t resume-app .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker run -d -p 8081:80 resume-app'
+            }
+        }
+    }
+}
+```
+
+---
+
+##  Step 7: Kubernetes Deployment
+
+Create `deployment.yaml`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: resume
+  template:
+    metadata:
+      labels:
+        app: resume
+    spec:
+      containers:
+      - name: resume-container
+        image: yourdockerhub/resume-app
+        ports:
+        - containerPort: 80
+```
+
+---
+
+### Apply using Kubernetes
+
+```bash
+kubectl apply -f deployment.yaml
+```
