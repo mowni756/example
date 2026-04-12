@@ -1,3 +1,4 @@
+https://chatgpt.com/share/69dbea59-4298-83e8-85db-9961a60291e9
 Here is a clear step-by-step guide to complete the midterm task shown in your paper (ISWE406P – Agile Development Process and DevOps Lab). I’ll keep it simple and practical so you can actually perform it during the exam or lab.
 
 Step-by-Step Implementation Guide
